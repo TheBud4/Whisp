@@ -17,34 +17,43 @@ const OnBoarding: React.FC = () => {
     <Onboarding
       pages={[
         {
-          backgroundColor: "#fff",
+          backgroundColor: "#DBFFD9",
           image: (
             <Image
               style={styles.image}
-              source={require("../../../assets/icon.png")}
+              source={require("../../../assets/foto-onboarding1.png")}
             />
           ),
-          title: "Bem Vindo!",
-          subtitle: "Tenha a melhor experiencia com nosso serviço de mensagens",
+          title: "Bem Vindo ao Whisp!",
+          subtitle: "Seu aplicativo de mensagens favorito.",
         },
         {
-          backgroundColor: "#fff",
+          backgroundColor: "#B0D6E0",
           image: (
             <Image
               style={styles.image}
-              source={require("../../../assets/icon.png")}
+              source={require("../../../assets/foto-onboarding2.png")}
             />
           ),
-          title: "The Title",
-          subtitle: "This is the subtitle that sumplements the title.",
-
+          title: "Conecte-se com pessoas do mundo todo!",
+          subtitle: "Converse com amigos e familiares.",
+        },
+        {
+          backgroundColor: "#C5BBE9",
+          image: (
+            <Image
+              style={styles.image}
+              source={require("../../../assets/foto-onboarding3.png")}
+            />
+          ),
+          title: "Tenha uma experiência incrível!",
+          subtitle: "Se comunicar nunca foi tão fácil.",
         },
       ]}
       onDone={() => navigation.navigate("Home")}
       onSkip={() => navigation.navigate("Home")}
-      bottomBarColor="#fff"
-
-      />
+      bottomBarColor="none"
+    />
   );
 };
 
