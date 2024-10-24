@@ -1,4 +1,4 @@
-import { Image, StyleSheet } from "react-native";
+import { Button, Image, StyleSheet } from "react-native";
 import Onboarding from "react-native-onboarding-swiper";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
@@ -8,6 +8,18 @@ type RootStackParamList = {
 };
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
+
+const NextButton = ({ ...props}:any) => {
+  return <Button title="Próximo" {...props} />;
+}
+const SkipButton = ({ ...props}:any) => {
+  return <Button title="Pular" {...props} />;
+}
+const DoneButton = ({ ...props}:any) => {
+  return <Button title="Pronto" {...props} />;
+}
+
+
 
 const OnBoarding: React.FC = () => {
 
@@ -53,6 +65,10 @@ const OnBoarding: React.FC = () => {
       onDone={() => navigation.navigate("Home")}
       onSkip={() => navigation.navigate("Home")}
       bottomBarColor="none"
+      NextButtonComponent={NextButton}
+      SkipButtonComponent={DoneButton}
+      DoneButtonComponent={DoneButton}
+      
     />
   );
 };
