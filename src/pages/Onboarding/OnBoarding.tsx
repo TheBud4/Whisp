@@ -10,6 +10,7 @@ type RootStackParamList = {
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
 
 const OnBoarding: React.FC = () => {
+
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
   return (
@@ -23,11 +24,11 @@ const OnBoarding: React.FC = () => {
               source={require("../../../assets/icon.png")}
             />
           ),
-          title: "Onboarding",
-          subtitle: "Done with React Native Onboarding Swiper",
+          title: "Bem Vindo!",
+          subtitle: "Tenha a melhor experiencia com nosso serviço de mensagens",
         },
         {
-          backgroundColor: "#fe6e58",
+          backgroundColor: "#fff",
           image: (
             <Image
               style={styles.image}
@@ -36,11 +37,14 @@ const OnBoarding: React.FC = () => {
           ),
           title: "The Title",
           subtitle: "This is the subtitle that sumplements the title.",
+
         },
       ]}
       onDone={() => navigation.navigate("Home")}
       onSkip={() => navigation.navigate("Home")}
-    />
+      bottomBarColor="#fff"
+
+      />
   );
 };
 
