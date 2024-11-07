@@ -13,12 +13,16 @@ const LoginScreen: React.FC = () => {
             <Text style={styles.title}>Login</Text>
             <TextInput
                 style={styles.input}
-                placeholder="Password"
+                placeholder="Informe sua senha"
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
             />
+            <View style={styles.botoes}>
             <Button title="Login" onPress={handleLogin} />
+
+            <Button title="Criar conta" onPress={handleLogin}/>
+            </View>
         </View>
     );
 };
@@ -41,6 +45,11 @@ const styles = StyleSheet.create({
         marginBottom: 12,
         paddingHorizontal: 8,
     },
+    botoes:{
+        padding: 50,
+        gap: 10,
+        backgroundColor: '#00008B',
+    }
 });
 
 export default LoginScreen;
