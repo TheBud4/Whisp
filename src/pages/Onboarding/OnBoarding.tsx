@@ -4,10 +4,10 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 
 type RootStackParamList = {
-  Home: undefined;
+  Login: undefined;
 };
 
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Login">;
 
 const NextButton = ({ ...props}:any) => {
   return <Button title="Próximo" {...props} />;
@@ -62,11 +62,11 @@ const OnBoarding: React.FC = () => {
           subtitle: "Se comunicar nunca foi tão fácil.",
         },
       ]}
-      onDone={() => navigation.navigate("Home")}
-      onSkip={() => navigation.navigate("Home")}
+      onDone={() => navigation.navigate("Login")}
+      onSkip={() => navigation.navigate("Login")}
       bottomBarColor="none"
       NextButtonComponent={NextButton}
-      SkipButtonComponent={DoneButton}
+      SkipButtonComponent={SkipButton}
       DoneButtonComponent={DoneButton}
       
     />
