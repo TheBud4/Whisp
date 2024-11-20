@@ -10,16 +10,19 @@ type RootStackParamList = {
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Login">;
 
 const NextButton = ({ ...props}:any) => {
-    return <Button title="Próximo" {...props} />;
+  return <Button 
+  title="Próximo"
+  style={styles.botaoproximo}
+  {...props} />;
 }
+
 const SkipButton = ({ ...props}:any) => {
     return <Button title="Pular" {...props} />;
 }
+
 const DoneButton = ({ ...props}:any) => {
     return <Button title="Pronto" {...props} />;
 }
-
-
 
 const OnBoarding: React.FC = () => {
 
@@ -74,6 +77,15 @@ const OnBoarding: React.FC = () => {
 };
 
 export const styles = StyleSheet.create({
+  image: {
+    width: 200,
+    height: 200,
+  },
+  botaoproximo:{
+    backgroundColor: "red",
+    color: "blue",
+    
+  }
     image: {
       width: 200,
       height: 200,
