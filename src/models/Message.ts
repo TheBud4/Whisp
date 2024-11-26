@@ -1,24 +1,24 @@
 export class Message {
-  id: number;
-  senderId: number;
-  recipientId: number;
-  text: string;
-  sentAt: Date;
-  isRead: boolean;
+  id: string;
+  conversationId: string;
+  senderId: string;
+  content?: string;
+  fileUrl?: string;
+  createdAt: Date;
 
   constructor(
-    id: number,
-    senderId: number,
-    recipientId: number,
-    text: string,
-    sentAt: Date,
-    isRead: boolean = false
+    id: string,
+    conversationId: string,
+    senderId: string,
+    content?: string,
+    fileUrl?: string,
+    createdAt: Date = new Date()
   ) {
     this.id = id;
+    this.conversationId = conversationId;
     this.senderId = senderId;
-    this.recipientId = recipientId;
-    this.text = text;
-    this.sentAt = sentAt;
-    this.isRead = isRead;
+    this.content = content;
+    this.fileUrl = fileUrl;
+    this.createdAt = createdAt;
   }
 }

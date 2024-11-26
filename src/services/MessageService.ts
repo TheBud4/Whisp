@@ -1,7 +1,7 @@
-import { Chat } from "../models/Chat";
+import { Chat } from "../models/Conversation";
 import { Message } from "../models/Message";
 import { User } from "../models/User";
-import { File } from "../models/File";
+import { File } from "../models/ConversationMember";
 
 class MessageService {
   userId: number;

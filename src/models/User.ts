@@ -1,29 +1,24 @@
 export class User {
-  id: number;
-  name: string;
-  foto: string;
+  id: string;
+  username: string;
   email: string;
-  online: boolean;
-  contacts: User[];
+  passwordHash: string;
+  avatarUrl?: string;
+  createdAt: Date;
 
   constructor(
-    id: number,
-    name: string,
-    foto: string,
+    id: string,
+    username: string,
     email: string,
-    online: boolean = false
+    passwordHash: string,
+    avatarUrl?: string,
+    createdAt: Date = new Date()
   ) {
     this.id = id;
-    this.name = name;
-    this.foto = foto;
+    this.username = username;
     this.email = email;
-    this.online = online;
-    this.contacts = [];
-  }
-
-  editar(name: string, foto: string, email: string) {
-    this.name = name;
-    this.foto = foto;
-    this.email = email;
+    this.passwordHash = passwordHash;
+    this.avatarUrl = avatarUrl;
+    this.createdAt = createdAt;
   }
 }
