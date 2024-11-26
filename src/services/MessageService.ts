@@ -3,7 +3,6 @@ import { Message } from "../models/Message";
 import { User } from "../models/User";
 import { File } from "../models/File";
 
-
 class MessageService {
   userId: number;
   chats: Chat[];
