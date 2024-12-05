@@ -1,12 +1,29 @@
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack/lib/typescript/src/types';
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
+type RootStackParamList = {
+    Home: undefined;
+  };
+  
+  type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
+
+
 const LoginScreen: React.FC = () => {
     const [password, setPassword] = useState<string>('');
+    const navigation = useNavigation<HomeScreenNavigationProp>();
+;
 
-    const handleLogin = () => {
+
+    function handleLogin() {
         console.log('Password:', password);
-    };
+        navigation.navigate("Home");
+    
+  
+
+
+    }
 
     return (
         <View style={styles.container}>
@@ -48,7 +65,9 @@ const styles = StyleSheet.create({
     botoes:{
         padding: 50,
         gap: 10,
-        backgroundColor: '#00008B',
+        borderRadius: 20,
+       
+       
     }
 });
 
