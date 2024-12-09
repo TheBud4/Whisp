@@ -3,7 +3,11 @@ import { User } from "../models/User";
 
 export class UserService {
   // Registro de usuário
-  static async register(email: string, password: string): Promise<User | null> {
+  static async register(
+    email: string,
+    password: string,
+    username?: string
+  ): Promise<User | null> {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -14,8 +18,24 @@ export class UserService {
       return null;
     }
 
-    return data.user;
+    if (data.user) {
+      return new User(
+        data.user.id,
+        email,
+        password,
+        username,
+        undefined, 
+        new Date() 
+      );
+    }
+
+    return null;
   }
+
+
+  /* 
+  TODO: Implementar um geramento de token para o usuário
+  */
 
   // Login de usuário
   static async login(email: string, password: string): Promise<User | null> {
@@ -29,7 +49,19 @@ export class UserService {
       return null;
     }
 
-    return data.user;
+    if (data.user) {
+     
+      return new User(
+        data.user.id,
+        email,
+        password, // A senha geralmente não é retornada após login
+        undefined, // Username
+        undefined, // avatarUrl
+        new Date(data.user.created_at) 
+      );
+    }
+
+    return null;
   }
 
   // Logout do usuário
@@ -46,9 +78,26 @@ export class UserService {
 
   // Obter o usuário atual
   static async getCurrentUser(): Promise<User | null> {
-    const { data } = await supabase.auth.getUser();
+    const { data, error } = await supabase.auth.getUser();
 
-    return data.user || null;
+    if (error) {
+      console.error("Erro ao obter usuário atual:", error.message);
+      return null;
+    }
+
+    if (data.user) {
+      
+      return new User(
+        data.user.id,
+        data.user.email ?? "",
+        "", // Senha não é retornada
+        undefined, // username não está disponível neste momento
+        undefined, // avatarUrl não está disponível neste momento
+        new Date(data.user.created_at) // Usa a data de criação retornada
+      );
+    }
+
+    return null;
   }
 
   // Atualizar dados do usuário
@@ -60,6 +109,17 @@ export class UserService {
       return null;
     }
 
-    return data.user;
+    if (data.user) {
+      return new User(
+        data.user.id,
+        data.user.email ?? "",
+        "", // Senha não é retornada
+        updates.username, // Atualização opcional de username
+        updates.avatarUrl, // Atualização opcional de avatarUrl
+        new Date(data.user.created_at) // Usa a data de criação retornada
+      );
+    }
+
+    return null;
   }
 }
