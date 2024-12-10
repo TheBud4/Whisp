@@ -3,6 +3,8 @@ import Onboarding from "react-native-onboarding-swiper";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 
+
+
 type RootStackParamList = {
   Login: undefined;
 };
