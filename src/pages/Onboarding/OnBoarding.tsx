@@ -1,34 +1,67 @@
-import { Button, Image, StyleSheet } from "react-native";
+import React from "react";
+import { Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons"; // Escolha o pacote de ícones que preferir
 import Onboarding from "react-native-onboarding-swiper";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
-
-
 
 type RootStackParamList = {
   Login: undefined;
 };
 
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Login">;
+type HomeScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Login"
+>;
 
-const NextButton = ({ ...props}:any) => {
-  return <Button 
-  title="Próximo"
-  style={styles.botaoproximo}
-  {...props} />;
-}
+const CustomButton = ({
+  title,
+  onPress,
+  style,
+  iconName,
+}: {
+  title: string;
+  onPress: () => void;
+  style: any;
+  iconName?: string;
+}) => (
+  <TouchableOpacity onPress={onPress} style={[styles.buttonBase, style]}>
+    {iconName && (
+      <Icon name={iconName} size={20} color="white" style={styles.icon} />
+    )}
+    <Text style={styles.buttonText}>{title}</Text>
+  </TouchableOpacity>
+);
 
-const SkipButton = ({ ...props}:any) => {
-    return <Button title="Pular" {...props} />;
-}
+const NextButton = (props: any) => (
+  <CustomButton
+    title="Próximo"
+    onPress={props.onPress}
+    style={styles.botaoproximo}
+    iconName="arrow-forward"
+  />
+);
 
-const DoneButton = ({ ...props}:any) => {
-    return <Button title="Pronto" {...props} />;
-}
+const SkipButton = (props: any) => (
+  <CustomButton
+    title="Pular"
+    onPress={props.onPress}
+    style={styles.botaopular}
+    iconName="skip-next"
+  />
+);
+
+const DoneButton = (props: any) => (
+  <CustomButton
+    title="Pronto"
+    onPress={props.onPress}
+    style={styles.botaoPronto}
+    iconName="check"
+  />
+);
 
 const OnBoarding: React.FC = () => {
-
-    const navigation = useNavigation<HomeScreenNavigationProp>();
+  const navigation = useNavigation<HomeScreenNavigationProp>();
 
   return (
     <Onboarding
@@ -69,25 +102,46 @@ const OnBoarding: React.FC = () => {
       ]}
       onDone={() => navigation.navigate("Login")}
       onSkip={() => navigation.navigate("Login")}
-      bottomBarColor="none"
       NextButtonComponent={NextButton}
       SkipButtonComponent={SkipButton}
       DoneButtonComponent={DoneButton}
-      
+      bottomBarHighlight={false}
     />
   );
 };
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   image: {
     width: 200,
     height: 200,
   },
-  botaoproximo:{
-    backgroundColor: "red",
-    color: "blue",
-    
-  }
+  buttonBase: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    backgroundColor: "blue",
+    marginHorizontal: 10,
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "bold",
+    marginLeft: 8,
+  },
+  icon: {
+    marginRight: 5,
+  },
+  botaoproximo: {
+    backgroundColor: "blue",
+  },
+  botaopular: {
+    backgroundColor: "gray",
+  },
+  botaoPronto: {
+    backgroundColor: "green",
+  },
 });
 
 export default OnBoarding;
