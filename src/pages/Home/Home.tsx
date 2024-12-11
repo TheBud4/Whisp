@@ -1,14 +1,16 @@
-import { Text, View } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
+import * as reactNative from 'react-native';
 
 export class Home extends Component {
   render() {
     return (
       <View>
-        <Text>Home</Text>
+        
       </View>
     )
   }
 }
+
 
 export default Home
