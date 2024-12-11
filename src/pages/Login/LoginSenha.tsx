@@ -1,29 +1,19 @@
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack/lib/typescript/src/types';
+import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button,TouchableOpacity, StyleSheet } from 'react-native';
 
 type RootStackParamList = {
     Home: undefined;
-  };
-  
-  type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
+};
 
-
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
 const LoginScreen: React.FC = () => {
     const [password, setPassword] = useState<string>('');
-    const navigation = useNavigation<HomeScreenNavigationProp>();
-;
 
-
-    function handleLogin() {
+    const handleLogin = () => {
         console.log('Password:', password);
-        navigation.navigate("Home");
+    };
     
-  
-
-
-    }
 
     return (
         <View style={styles.container}>
@@ -37,8 +27,13 @@ const LoginScreen: React.FC = () => {
             />
             <View style={styles.botoes}>
             <Button title="Login" onPress={handleLogin} />
+            
 
-            <Button title="Criar conta" onPress={handleLogin}/>
+            <Button 
+            title="Criar conta" 
+            onPress={handleLogin}
+
+            />
             </View>
         </View>
     );
@@ -65,10 +60,12 @@ const styles = StyleSheet.create({
     botoes:{
         padding: 50,
         gap: 10,
-        borderRadius: 20,
-       
-       
-    }
+        
+    },
+    botao:{
+
+
+    },
 });
 
 export default LoginScreen;
