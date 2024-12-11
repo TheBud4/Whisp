@@ -2,13 +2,11 @@ import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import { styles } from 'src/styles/main'
 
-
-
-
 export class Home extends Component {
+  
+  
   render() {
     return (
-      
       <View style={styles.container}>
         { /*Conteudo Principal*/}
         <View style={styles.content}>
