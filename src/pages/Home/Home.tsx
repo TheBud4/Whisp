@@ -3,13 +3,11 @@ import React, { Component } from 'react'
 import { styles } from 'src/styles/main'
 import { Ionicons } from '@expo/vector-icons';
 
-
-
-
 export class Home extends Component {
+  
+  
   render() {
     return (
-      
       <View style={styles.container}>
         { /*Conteudo Principal*/}
         <View style={styles.content}>
