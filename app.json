@@ -1,6 +1,7 @@
 {
   "expo": {
     "jsEngine": "hermes",
+    "newArchEnabled": true,
     "name": "Whisp",
     "slug": "Whisp",
     "version": "1.0.0",
