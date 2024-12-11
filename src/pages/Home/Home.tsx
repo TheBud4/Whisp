@@ -1,6 +1,7 @@
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import { styles } from 'src/styles/main'
+import { Ionicons } from '@expo/vector-icons';
 
 
 
@@ -19,17 +20,17 @@ export class Home extends Component {
 
        <View style={styles.floatingButtons}>
         <TouchableOpacity style={styles.button}>
-          {/*Aqui vai o icone de conversas */}
+        <Ionicons name="chatbubble-ellipses-outline" size={24} color="#007bff" />
           <Text style={ styles.buttonLabel}>Conversas</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.button}>
-          {/*Aqui vai o icone de Contatos */}
+        <Ionicons name="people-outline" size={24} color="#007bff" />
           <Text style={ styles.buttonLabel}>Contatos</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.button}>
-          {/*Aqui vai o icone de Grupos */}
+        <Ionicons name="people-circle-outline" size={24} color="#007bff" />
           <Text style={styles.buttonLabel}>Grupos</Text>
         </TouchableOpacity>
        </View>
