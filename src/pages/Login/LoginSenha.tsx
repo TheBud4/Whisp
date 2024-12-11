@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button,TouchableOpacity, StyleSheet } from 'react-native';
@@ -9,9 +10,12 @@ type RootStackParamList = {
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
 const LoginScreen: React.FC = () => {
     const [password, setPassword] = useState<string>('');
+    const navigation = useNavigation<HomeScreenNavigationProp>();
+    
 
     const handleLogin = () => {
         console.log('Password:', password);
+        navigation.navigate("Home")
     };
     
 
