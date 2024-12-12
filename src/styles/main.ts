@@ -31,6 +31,6 @@ export const styles = StyleSheet.create({
   buttonLabel: {
     marginTop: 5,
     fontSize: 12,
-    color: '#007bff',
+    color: '#00000',
   },
 });

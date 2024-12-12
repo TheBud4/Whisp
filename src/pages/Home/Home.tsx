@@ -18,17 +18,17 @@ export class Home extends Component {
 
        <View style={styles.floatingButtons}>
         <TouchableOpacity style={styles.button}>
-        <Ionicons name="chatbubble-ellipses-outline" size={24} color="#007bff" />
+        <Ionicons name="chatbubble-ellipses-outline" size={24} color="#00000" />
           <Text style={ styles.buttonLabel}>Conversas</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.button}>
-        <Ionicons name="people-outline" size={24} color="#007bff" />
+        <Ionicons name="people-outline" size={24} color="#000000" />
           <Text style={ styles.buttonLabel}>Contatos</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.button}>
-        <Ionicons name="people-circle-outline" size={24} color="#007bff" />
+        <Ionicons name="people-circle-outline" size={24} color="#000000" />
           <Text style={styles.buttonLabel}>Grupos</Text>
         </TouchableOpacity>
        </View>
