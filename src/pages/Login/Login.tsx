@@ -3,8 +3,9 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
+
 type RootStackParamList = {
-    LoginSenha: undefined;
+    LoginSenha: { email: string };
 };
 
   type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "LoginSenha">;
@@ -17,8 +18,7 @@ const LoginScreen: React.FC = () => {
 
     const handleLogin = () => {
         // Lógica de login aqui
-        console.log('Email:', email);
-        navigation.navigate("LoginSenha")
+        navigation.navigate("LoginSenha", { email });
     };
 
     return (
@@ -33,6 +33,7 @@ const LoginScreen: React.FC = () => {
                 autoCapitalize="none"
             />
             <Button title="Login" onPress={handleLogin} />
+        
         </View>
     );
 };
