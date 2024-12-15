@@ -15,27 +15,6 @@ const navigateHome = (userEmail: string) => {
 };
 
 
-async function registerUser() {
-  const email = "admin@admin.com";
-  const password = "admin123"; // Certifique-se de que a senha tenha pelo menos 6 caracteres
-
-  const { user, error } = await supabase.auth.signUp({
-    email,
-    password,
-  });
-
-  if (error) {
-    console.error("Erro ao criar usuário:", error.message);
-  } else {
-    console.log("Usuário registrado com sucesso:", user);
-  }
-}
-
-registerUser();
-
-
-
-
 export class UserService {
   // Registro de usuário
   static async register(
@@ -70,22 +49,24 @@ export class UserService {
   // Login de usuário
   static async login(email: string, password: string): Promise<User | null> {
     
-    
     console.log(email, password );
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
 
-    if (error) {
-      console.error("Erro no login:", error.message);
-      return null;
-    }
-
-    if (data.user) {
-      console.log("Passou 2");
       navigateHome(email);
-    }
+
+    // const { data, error } = await supabase.auth.signInWithPassword({
+    //   email,
+    //   password,
+    // });
+
+    // if (error) {
+    //   console.error("Erro no login:", error.message);
+    //   return null;
+    // }
+
+    // if (data.user) {
+    //   console.log("Passou 2");
+    //   navigateHome(email);
+    // }
 
     return null;
   }
