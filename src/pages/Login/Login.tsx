@@ -5,9 +5,10 @@ import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 type RootStackParamList = {
     LoginSenha: undefined;
-  };
-  
+};
+
   type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "LoginSenha">;
+
 
 const LoginScreen: React.FC = () => {
     const [email, setEmail] = useState<string>('');
