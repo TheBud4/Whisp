@@ -1,21 +1,28 @@
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button,TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { useRoute, RouteProp } from "@react-navigation/native";
+import { UserService } from "src/services/UserService";
+
+type LoginSenhaRouteProp = 
+RouteProp<RootStackParamList, 'LoginSenha'>;
 
 type RootStackParamList = {
     Home: undefined;
+    LoginSenha: { email: string };
 };
 
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
-const LoginScreen: React.FC = () => {
+const LoginSenhaScreen: React.FC = () => {
+    const route = useRoute<LoginSenhaRouteProp>();
     const [password, setPassword] = useState<string>('');
-    const navigation = useNavigation<HomeScreenNavigationProp>();
-    
+    const { email } = route.params;    
 
-    const handleLogin = () => {
-        console.log('Password:', password);
-        navigation.navigate("Home")
+    const handleLogin = async () => {
+        try {
+            console.log(email, password);
+          await UserService.login(email, password);
+        } catch (error) {
+          console.error("Erro ao fazer login:", error);
+        }
     };
     
 
@@ -72,4 +79,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default LoginScreen;
+export default LoginSenhaScreen;

@@ -1,5 +1,40 @@
 import { supabase } from "../../supabase";
 import { User } from "../models/User";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+type RootStackParamList = {
+  Home: { email: string };
+};
+
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
+
+const navigateHome = (userEmail: string) => {
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+  navigation.navigate("Home", { email: userEmail });
+};
+
+
+async function registerUser() {
+  const email = "admin@admin.com";
+  const password = "admin123"; // Certifique-se de que a senha tenha pelo menos 6 caracteres
+
+  const { user, error } = await supabase.auth.signUp({
+    email,
+    password,
+  });
+
+  if (error) {
+    console.error("Erro ao criar usuário:", error.message);
+  } else {
+    console.log("Usuário registrado com sucesso:", user);
+  }
+}
+
+registerUser();
+
+
+
 
 export class UserService {
   // Registro de usuário
@@ -24,8 +59,8 @@ export class UserService {
         email,
         password,
         username,
-        undefined, 
-        new Date() 
+        undefined,
+        new Date()
       );
     }
 
@@ -40,6 +75,9 @@ export class UserService {
 
   // Login de usuário
   static async login(email: string, password: string): Promise<User | null> {
+    
+    
+    console.log(email, password );
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -51,15 +89,8 @@ export class UserService {
     }
 
     if (data.user) {
-     
-      return new User(
-        data.user.id,
-        email,
-        undefined, // Senha
-        undefined, // Username
-        undefined, // avatarUrl
-        new Date(data.user.created_at) 
-      );
+      console.log("Passou 2");
+      navigateHome(email);
     }
 
     return null;
@@ -87,14 +118,13 @@ export class UserService {
     }
 
     if (data.user) {
-      
       return new User(
         data.user.id,
         data.user.email ?? "",
-        "", 
-        undefined, 
-        undefined, 
-        new Date(data.user.created_at) 
+        "",
+        undefined,
+        undefined,
+        new Date(data.user.created_at)
       );
     }
 
@@ -114,9 +144,9 @@ export class UserService {
       return new User(
         data.user.id,
         data.user.email ?? "",
-        "", 
-        updates.username, 
-        updates.avatarUrl, 
+        "",
+        updates.username,
+        updates.avatarUrl,
         new Date(data.user.created_at)
       );
     }
