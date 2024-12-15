@@ -2,14 +2,14 @@ export class User{
   id: string;
   username?: string;
   email: string;
-  password: string;
+  password?: string;
   avatarUrl?: string;
-  createdAt: Date;
+  createdAt?: Date;
 
   constructor(
     id: string,
     email: string,
-    password: string,
+    password?: string,
     username?: string,
     avatarUrl?: string,
     createdAt: Date = new Date()

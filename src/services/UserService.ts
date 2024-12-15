@@ -54,7 +54,7 @@ export class UserService {
       return new User(
         data.user.id,
         email,
-        password, // A senha geralmente não é retornada após login
+        undefined, // Senha
         undefined, // Username
         undefined, // avatarUrl
         new Date(data.user.created_at) 
@@ -90,10 +90,10 @@ export class UserService {
       return new User(
         data.user.id,
         data.user.email ?? "",
-        "", // Senha não é retornada
-        undefined, // username não está disponível neste momento
-        undefined, // avatarUrl não está disponível neste momento
-        new Date(data.user.created_at) // Usa a data de criação retornada
+        "", 
+        undefined, 
+        undefined, 
+        new Date(data.user.created_at) 
       );
     }
 
@@ -113,10 +113,10 @@ export class UserService {
       return new User(
         data.user.id,
         data.user.email ?? "",
-        "", // Senha não é retornada
-        updates.username, // Atualização opcional de username
-        updates.avatarUrl, // Atualização opcional de avatarUrl
-        new Date(data.user.created_at) // Usa a data de criação retornada
+        "", 
+        updates.username, 
+        updates.avatarUrl, 
+        new Date(data.user.created_at)
       );
     }
 
