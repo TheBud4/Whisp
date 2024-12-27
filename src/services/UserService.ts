@@ -32,6 +32,7 @@ export class UserService {
     return null;
   }
 
+  
 
   /* 
   TODO: Implementar um geramento de token para o usuário
