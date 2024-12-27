@@ -35,8 +35,6 @@ export class UserService {
   // Login de usuário
   static async login(email: string, password: string): Promise<string | null> {
     
-    console.log(email, password );
-
       return "userkey";
 
     // const { data, error } = await supabase.auth.signInWithPassword({
