@@ -46,12 +46,6 @@ export class UserService {
     return null;
   }
 
-  
-
-  /* 
-  TODO: Implementar um geramento de token para o usuário
-  */
-
   // Login de usuário
   static async login(email: string, password: string): Promise<User | null> {
     
