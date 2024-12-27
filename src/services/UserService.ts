@@ -1,19 +1,5 @@
 import { supabase } from "../../supabase";
 import { User } from "../models/User";
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-
-type RootStackParamList = {
-  Home: { email: string };
-};
-
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
-
-const navigateHome = (userEmail: string) => {
-  const navigation = useNavigation<HomeScreenNavigationProp>();
-  navigation.navigate("Home", { email: userEmail });
-};
-
 
 export class UserService {
   // Registro de usuário
@@ -47,11 +33,11 @@ export class UserService {
   }
 
   // Login de usuário
-  static async login(email: string, password: string): Promise<User | null> {
+  static async login(email: string, password: string): Promise<string | null> {
     
     console.log(email, password );
 
-      navigateHome(email);
+      return "userkey";
 
     // const { data, error } = await supabase.auth.signInWithPassword({
     //   email,
@@ -67,8 +53,6 @@ export class UserService {
     //   console.log("Passou 2");
     //   navigateHome(email);
     // }
-
-    return null;
   }
 
   // Logout do usuário

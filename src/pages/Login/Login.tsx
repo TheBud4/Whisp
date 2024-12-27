@@ -8,16 +8,15 @@ type RootStackParamList = {
     LoginSenha: { email: string };
 };
 
-  type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "LoginSenha">;
+  type PasswordScreenNavigationProp = StackNavigationProp<RootStackParamList, "LoginSenha">;
 
 
 const LoginScreen: React.FC = () => {
     const [email, setEmail] = useState<string>('');
-    const navigation = useNavigation<HomeScreenNavigationProp>();
+    const navigation = useNavigation<PasswordScreenNavigationProp>();
 
 
     const handleLogin = () => {
-        // Lógica de login aqui
         navigation.navigate("LoginSenha", { email });
     };
 
