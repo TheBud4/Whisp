@@ -2,9 +2,13 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 16,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "baseline",
+    paddingHorizontal: 20,
+    gap: 15,
     backgroundColor: "#fff",
+    height: "100%",
   },
   title: {
     fontSize: 24,
@@ -17,17 +21,21 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     borderWidth: 1,
     borderRadius: 8,
-    marginBottom: 15,
     paddingHorizontal: 10,
+    width: 300,
   },
   passwordContainer: {
-    flexDirection: "row",
-    alignItems: "center",
     borderColor: "#ccc",
     borderWidth: 1,
     borderRadius: 8,
-    paddingHorizontal: 10,
-    marginBottom: 15,
+    padding: 10,
+  },
+  password: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 10,
   },
   botoes: {
     marginTop: 20,

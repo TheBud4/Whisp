@@ -23,12 +23,15 @@ const RegistrationScreen: React.FC = () => {
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
 
-  const handleLogin = () => {
+  const handleRegistration = () => {
     if (password !== confirmPassword) {
       alert("As senhas não coincidem!");
       return;
     }
-    navigation.navigate("SecondStepLoginScreen", { email });
+
+    const cadastrar = "";
+
+    navigation.navigate("HomeScreen");
   };
 
   return (
@@ -54,50 +57,50 @@ const RegistrationScreen: React.FC = () => {
         keyboardType="email-address"
         autoCapitalize="none"
       />
-
-      {/* Senha */}
       <View style={styles.passwordContainer}>
-        <TextInput
-          style={[styles.input, { flex: 1 }]}
-          placeholder="Senha"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry={!showPassword}
-          autoCapitalize="none"
-        />
-        <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-          <Icon
-            name={showPassword ? "visibility" : "visibility-off"}
-            size={24}
-            color="gray"
+        {/* Senha */}
+        <View style={styles.password}>
+          <TextInput
+            style={styles.input}
+            placeholder="Senha"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={!showPassword}
+            autoCapitalize="none"
           />
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+            <Icon
+              name={showPassword ? "visibility" : "visibility-off"}
+              size={24}
+              color="gray"
+            />
+          </TouchableOpacity>
+        </View>
 
-      {/* Confirmar Senha */}
-      <View style={styles.passwordContainer}>
-        <TextInput
-          style={[styles.input, { flex: 1 }]}
-          placeholder="Confirmar Senha"
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          secureTextEntry={!showConfirmPassword}
-          autoCapitalize="none"
-        />
-        <TouchableOpacity
-          onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-        >
-          <Icon
-            name={showConfirmPassword ? "visibility" : "visibility-off"}
-            size={24}
-            color="gray"
+        {/* Confirmar Senha */}
+        <View style={styles.password}>
+          <TextInput
+            style={styles.input}
+            placeholder="Confirmar Senha"
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            secureTextEntry={!showConfirmPassword}
+            autoCapitalize="none"
           />
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => setShowConfirmPassword(!showConfirmPassword)}
+          >
+            <Icon
+              name={showConfirmPassword ? "visibility" : "visibility-off"}
+              size={24}
+              color="gray"
+            />
+          </TouchableOpacity>
+        </View>
       </View>
-
       {/* Botão de Cadastro */}
       <View style={styles.botoes}>
-        <Button title="Cadastrar" onPress={handleLogin} />
+        <Button title="Cadastrar" onPress={handleRegistration} />
       </View>
     </View>
   );
