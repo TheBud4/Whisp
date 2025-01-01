@@ -1,9 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
-import { RootStackParamList } from "../../../@types/navigationTypes";
-
+import { useState } from "react";
+import { View, Text, TextInput, Button } from "react-native";
+import { RootStackParamList } from "../../../../@types/navigationTypes";
+import styles from "./style";
 
 type ScreenProps = StackNavigationProp<
   RootStackParamList,
@@ -39,29 +39,5 @@ const FirstStepLoginScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    padding: 20,
-  },
-  title: {
-    fontSize: 30,
-    marginBottom: 16,
-    textAlign: "center",
-  },
-  input: {
-    height: 40,
-    borderColor: "#ccc",
-    borderWidth: 1,
-    marginBottom: 12,
-    paddingHorizontal: 8,
-  },
-  botoes: {
-    padding: 50,
-    gap: 10,
-  },
-});
 
 export default FirstStepLoginScreen;

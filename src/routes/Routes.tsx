@@ -4,8 +4,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // Importação das telas
 import OnboardingScreen from "../pages/Onboarding/OnBoardingScreen";
 import HomeScreen from "../pages/Home/HomeScreen";
-import FirstStepLoginScreen from "../pages/TwoStepLogin/FirstStepLoginScreen";
-import SecondStepLoginScreen from "../pages/TwoStepLogin/SecondStepLoginScreen";
+import FirstStepLoginScreen from "../pages/TwoStepLogin/FirstStepLogin/FirstStepLoginScreen";
+import SecondStepLoginScreen from "../pages/TwoStepLogin/SecondStepLogin/SecondStepLoginScreen";
 import RegistrationScreen from "../pages/Registration/RegistrationScreen";
 
 const Stack = createNativeStackNavigator();

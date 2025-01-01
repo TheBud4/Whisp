@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { View, Text, TextInput, Button } from "react-native";
 import { useRoute, RouteProp, useNavigation } from "@react-navigation/native";
 import { UserService } from "src/services/UserService";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../../../@types/navigationTypes";
+import { RootStackParamList } from "../../../../@types/navigationTypes";
+import styles from "./style";
 
 type RouteProps = RouteProp<RootStackParamList, "SecondStepLoginScreen">;
 
@@ -46,30 +47,5 @@ const SecondStepLoginScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    padding: 16,
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 16,
-    textAlign: "center",
-  },
-  input: {
-    height: 40,
-    borderColor: "#ccc",
-    borderWidth: 1,
-    marginBottom: 12,
-    paddingHorizontal: 8,
-  },
-  botoes: {
-    padding: 50,
-    gap: 10,
-  },
-  botao: {},
-});
 
 export default SecondStepLoginScreen;
