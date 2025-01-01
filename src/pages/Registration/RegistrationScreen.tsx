@@ -7,9 +7,12 @@ import { RootStackParamList } from "../../../@types/navigationTypes";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 
-type ScreenProps = StackNavigationProp<RootStackParamList, "CadastroScreen">;
+type ScreenProps = StackNavigationProp<
+  RootStackParamList,
+  "RegistrationScreen"
+>;
 
-const CadastroScreen: React.FC = () => {
+const RegistrationScreen: React.FC = () => {
   const navigation = useNavigation<ScreenProps>();
 
   const [userName, setUserName] = useState<string>("");
@@ -17,14 +20,15 @@ const CadastroScreen: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState<boolean>(false);
 
   const handleLogin = () => {
     if (password !== confirmPassword) {
       alert("As senhas não coincidem!");
       return;
     }
-    navigation.navigate("LoginSenha", { email });
+    navigation.navigate("SecondStepLoginScreen", { email });
   };
 
   return (
@@ -99,4 +103,4 @@ const CadastroScreen: React.FC = () => {
   );
 };
 
-export default CadastroScreen;
+export default RegistrationScreen;

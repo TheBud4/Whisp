@@ -2,41 +2,41 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // Importação das telas
-import OnboardingScreen from "../pages/Onboarding/OnBoarding";
-import Home from "../pages/Home/Home";
-import Login from "../pages/Login/Login";
-import LoginSenha from "../pages/Login/LoginSenha";
-import CadastroScreen from "../pages/Cadastro/Cadastro";
+import OnboardingScreen from "../pages/Onboarding/OnBoardingScreen";
+import HomeScreen from "../pages/Home/HomeScreen";
+import FirstStepLoginScreen from "../pages/TwoStepLogin/FirstStepLoginScreen";
+import SecondStepLoginScreen from "../pages/TwoStepLogin/SecondStepLoginScreen";
+import RegistrationScreen from "../pages/Registration/RegistrationScreen";
 
 const Stack = createNativeStackNavigator();
 
 const Routes: React.FC = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Onboarding">
+      <Stack.Navigator initialRouteName="OnboardingScreen">
         <Stack.Screen
-          name="Onboarding"
+          name="OnboardingScreen"
           component={OnboardingScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Home"
-          component={Home}
+          name="HomeScreen"
+          component={HomeScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Login"
-          component={Login}
+          name="FirstStepLoginScreen"
+          component={FirstStepLoginScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="LoginSenha"
-          component={LoginSenha}
+          name="SecondStepLoginScreen"
+          component={SecondStepLoginScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Cadastro"
-          component={CadastroScreen}
+          name="RegistrationScreen"
+          component={RegistrationScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

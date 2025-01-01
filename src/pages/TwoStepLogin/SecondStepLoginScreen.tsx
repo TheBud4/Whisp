@@ -3,21 +3,18 @@ import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useRoute, RouteProp, useNavigation } from "@react-navigation/native";
 import { UserService } from "src/services/UserService";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../../@types/navigationTypes";
 
-type LoginSenhaRouteProp = RouteProp<RootStackParamList, "LoginSenha">;
+type RouteProps = RouteProp<RootStackParamList, "SecondStepLoginScreen">;
 
-type RootStackParamList = {
-  Home: {userKey: string};
-  LoginSenha: { email: string };
-};
+type ScreenProps = StackNavigationProp<
+  RootStackParamList,
+  "SecondStepLoginScreen"
+>;
 
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "LoginSenha">;
-
-
-
-const LoginSenhaScreen: React.FC = () => {
-  const route = useRoute<LoginSenhaRouteProp>();
-  const navigation = useNavigation<HomeScreenNavigationProp>();
+const SecondStepLoginScreen: React.FC = () => {
+  const route = useRoute<RouteProps>();
+  const navigation = useNavigation<ScreenProps>();
   const [password, setPassword] = useState<string>("");
   const { email } = route.params;
 
@@ -25,11 +22,9 @@ const LoginSenhaScreen: React.FC = () => {
     try {
       console.log(email, password);
       const loginResult = await UserService.login(email, password);
-        if(!loginResult)
-            return;
-        
-      navigation.navigate("Home", { userKey: loginResult });
-        
+      if (!loginResult) return;
+
+      navigation.navigate("HomeScreen");
     } catch (error) {
       console.error("Erro ao fazer login:", error);
     }
@@ -77,4 +72,4 @@ const styles = StyleSheet.create({
   botao: {},
 });
 
-export default LoginSenhaScreen;
+export default SecondStepLoginScreen;

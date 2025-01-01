@@ -1,8 +1,9 @@
 
-// @types/navigation.ts
+// @types/navigationTypes.ts
 export type RootStackParamList = {
-  Home: undefined;
-  CadastroScreen: undefined;
-  LoginSenha: { email: string };
-  Login: undefined;
+  OnboardingScreen: undefined;
+  RegistrationScreen: undefined;
+  FirstStepLoginScreen: undefined;
+  SecondStepLoginScreen: { email: string };
+  HomeScreen: undefined;
 };

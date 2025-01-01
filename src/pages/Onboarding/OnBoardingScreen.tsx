@@ -1,17 +1,14 @@
 import React from "react";
 import { Text, Image, StyleSheet, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons"; // Escolha o pacote de ícones que preferir
+import Icon from "react-native-vector-icons/MaterialIcons";
 import Onboarding from "react-native-onboarding-swiper";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../../../@types/navigationTypes";
 
-type RootStackParamList = {
-  Login: undefined;
-};
-
-type HomeScreenNavigationProp = StackNavigationProp<
+type ScreenProps = StackNavigationProp<
   RootStackParamList,
-  "Login"
+  "OnboardingScreen"
 >;
 
 const CustomButton = ({
@@ -60,8 +57,8 @@ const DoneButton = (props: any) => (
   />
 );
 
-const OnBoarding: React.FC = () => {
-  const navigation = useNavigation<HomeScreenNavigationProp>();
+const OnBoardingScreen: React.FC = () => {
+  const navigation = useNavigation<ScreenProps>();
 
   return (
     <Onboarding
@@ -100,8 +97,8 @@ const OnBoarding: React.FC = () => {
           subtitle: "Se comunicar nunca foi tão fácil.",
         },
       ]}
-      onDone={() => navigation.navigate("Login")}
-      onSkip={() => navigation.navigate("Login")}
+      onDone={() => navigation.navigate("FirstStepLoginScreen")}
+      onSkip={() => navigation.navigate("FirstStepLoginScreen")}
       NextButtonComponent={NextButton}
       SkipButtonComponent={SkipButton}
       DoneButtonComponent={DoneButton}
@@ -144,4 +141,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OnBoarding;
+export default OnBoardingScreen;

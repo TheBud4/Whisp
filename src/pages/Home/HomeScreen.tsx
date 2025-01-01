@@ -3,7 +3,8 @@ import React from "react";
 import { styles } from "src/styles/main";
 import { Ionicons } from "@expo/vector-icons";
 
-const Home = () => {
+const HomeScreen: React.FC = () => {
+  
   return (
     <View style={styles.container}>
       {/*Conteudo Principal*/}
@@ -39,4 +40,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeScreen;
