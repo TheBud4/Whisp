@@ -47,7 +47,6 @@ const LoginSenhaScreen: React.FC = () => {
       />
       <View style={styles.botoes}>
         <Button title="Login" onPress={handleLogin} />
-        <Button title="Criar conta" onPress={handleLogin} />
       </View>
     </View>
   );
