@@ -1,10 +1,10 @@
-import React from "react";
-import { Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, Image, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Onboarding from "react-native-onboarding-swiper";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../../@types/navigationTypes";
+import styles from "./style";
 
 type ScreenProps = StackNavigationProp<
   RootStackParamList,
@@ -106,39 +106,4 @@ const OnBoardingScreen: React.FC = () => {
     />
   );
 };
-
-const styles = StyleSheet.create({
-  image: {
-    width: 200,
-    height: 200,
-  },
-  buttonBase: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-    backgroundColor: "blue",
-    marginHorizontal: 10,
-  },
-  buttonText: {
-    color: "white",
-    fontWeight: "bold",
-    marginLeft: 8,
-  },
-  icon: {
-    marginRight: 5,
-  },
-  botaoproximo: {
-    backgroundColor: "blue",
-  },
-  botaopular: {
-    backgroundColor: "gray",
-  },
-  botaoPronto: {
-    backgroundColor: "green",
-  },
-});
-
 export default OnBoardingScreen;
