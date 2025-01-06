@@ -5,7 +5,8 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import styles from "./style";
 import { RootStackParamList } from "../../../@types/navigationTypes";
 import Icon from "react-native-vector-icons/MaterialIcons";
-
+import { UserService } from "@/services/UserService";
+import { User } from "@/models/User";
 
 type ScreenProps = StackNavigationProp<
   RootStackParamList,
@@ -23,15 +24,25 @@ const RegistrationScreen: React.FC = () => {
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
 
-  const handleRegistration = () => {
+  const handleRegistration = async () => {
     if (password !== confirmPassword) {
       alert("As senhas não coincidem!");
       return;
     }
-
-    const cadastrar = "";
-
-    navigation.navigate("HomeScreen");
+    const user: User = {
+      email,
+      username: userName,
+      password,
+    };
+    try {
+      const register = await UserService.register(user);
+      
+      if (!register) return;
+      
+      navigation.navigate("FirstStepLoginScreen");
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (

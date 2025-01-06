@@ -21,13 +21,11 @@ const SecondStepLoginScreen: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      console.log(email, password);
       const loginResult = await UserService.login(email, password);
       if (!loginResult) return;
-
       navigation.navigate("HomeScreen");
     } catch (error) {
-      console.error("Erro ao fazer login:", error);
+      alert(error);
     }
   };
 

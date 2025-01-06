@@ -2,73 +2,84 @@ import { supabase } from "../../supabase";
 import { User } from "../models/User";
 
 export class UserService {
-  
-  // Registro de usuário
+  // Cadastro de usuario
+  static async register(user: User): Promise<boolean> {
+    const { username, email, password } = user;
 
-  static async register(
-    email: string,
-    password: string,
-    username?: string
-  ): Promise<boolean> {
-    // Verifique se o email é válido
-    
+    if (!email || !password) {
+      return false;
+    }
+
+    const { data, error } = await supabase
+      .from("users")
+      .select("email")
+      .eq("email", email)
+      .single();
+
+    if (error && error.code !== "PGRST116") {
+      throw "Erro ao verificar e-mail.";
+    }
+
+    if (data) {
+      throw "Este e-mail já está registrado.";
+    }
+
+    // Validação de e-mail
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      throw new Error("Email inválido");
+      throw "Email inválido";
     }
 
-    // Verifique se a senha tem pelo menos 8 caracteres
+    // Validação de senha
     if (password.length < 8) {
-      throw new Error("A senha precisa ter pelo menos 8 caracteres");
+      throw "A senha precisa ter pelo menos 8 caracteres";
     }
 
-    // Registre o usuário com email e senha no Supabase
-    const { data: signUpData, error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
+    // Gera um nome de usuário padrão, se necessário
+    const sanitizedUsername =
+      username || "user_" + Math.random().toString(36).substring(2, 10);
 
-    if (error) {
-      throw new Error(error.message);
-    }
-
-    // Criação de um perfil do usuário (nome de usuário e avatar)
-    const { data: profileData, error: profileError } = await supabase
-      .from("users") // Certifique-se de que sua tabela de usuários está configurada corretamente
-      .insert([
-        {
-          username,
-          email,
-          avatar_url: "", // ou qualquer URL de avatar padrão
-          id: signUpData.user?.id,
-        },
-      ]);
+    // Criação de perfil do usuário
+    const { error: profileError } = await supabase.from("users").insert([
+      {
+        username: sanitizedUsername,
+        email: email,
+        password: password,
+      },
+    ]);
 
     if (profileError) {
-      throw new Error(profileError.message);
+      throw 'Erro ao criar o perfil do usuário: ' + profileError?.message 
     }
 
     return true;
   }
 
   // Login de usuário
-  static async login(email: string, password: string): Promise<string | null> {
-    return "userkey";
+  static async login(
+    email: string,
+    password: string
+  ): Promise<{ userId: string }> {
+    const { data, error } = await supabase
+      .from("users")
+      .select("email, password, id")
+      .eq("email", email)
+      .single();
 
-    // const { data, error } = await supabase.auth.signInWithPassword({
-    //   email,
-    //   password,
-    // });
+    if (error) {
+      throw "Email ou senha incorretos";
+    }
 
-    // if (error) {
-    //   console.error("Erro no login:", error.message);
-    //   return null;
-    // }
+    if (!data) {
+      throw "Email incorreto";
+    }
 
-    // if (data.user) {
-    //   console.log("Passou 2");
-    //   navigateHome(email);
-    // }
+    if (password !== data.password) {
+      throw "Senha incorreta";
+    }
+
+    // Se tudo estiver correto, retorna o id do usuário
+    return { userId: data.id };
   }
 
   // Logout do usuário
