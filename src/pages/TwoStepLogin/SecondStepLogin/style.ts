@@ -11,18 +11,29 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     textAlign: "center",
   },
-  input: {
+  passwordContainer: {
+    position: "relative",
     height: 40,
     borderColor: "#ccc",
     borderWidth: 1,
-    marginBottom: 12,
+    borderRadius: 4,
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 8,
+  },
+  input: {
+    flex: 1,
+    height: "100%",
+    paddingRight: 40, 
+  },
+  iconContainer: {
+    position: "absolute",
+    right: 10, 
   },
   botoes: {
     padding: 50,
     gap: 10,
   },
-  botao: {},
 });
 
 export default styles;
