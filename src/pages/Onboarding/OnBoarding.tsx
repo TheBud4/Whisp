@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, Image, StyleSheet, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons"; // Escolha o pacote de ícones que preferir
+import Icon from "react-native-vector-icons/MaterialIcons"; 
 import Onboarding from "react-native-onboarding-swiper";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
@@ -69,10 +69,12 @@ const OnBoarding: React.FC = () => {
         {
           backgroundColor: "#DBFFD9",
           image: (
+
             <Image
               style={styles.image}
               source={require("../../../assets/foto-onboarding1.png")}
             />
+            
           ),
           title: "Bem Vindo ao Whisp!",
           subtitle: "Seu aplicativo de mensagens favorito.",
@@ -111,6 +113,13 @@ const OnBoarding: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
+
+  gradientBackground: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
   image: {
     width: 200,
     height: 200,

@@ -33,4 +33,10 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     color: '#00000',
   },
+  gradientBackground: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
 });
