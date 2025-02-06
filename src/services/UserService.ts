@@ -24,44 +24,33 @@ export class UserService {
         email,
         password,
         username,
-        undefined, 
-        new Date() 
+        undefined,
+        new Date()
       );
     }
 
     return null;
   }
 
-
-  /* 
-  TODO: Implementar um geramento de token para o usuário
-  */
-
   // Login de usuário
-  static async login(email: string, password: string): Promise<User | null> {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+  static async login(email: string, password: string): Promise<string | null> {
+    
+      return "userkey";
 
-    if (error) {
-      console.error("Erro no login:", error.message);
-      return null;
-    }
+    // const { data, error } = await supabase.auth.signInWithPassword({
+    //   email,
+    //   password,
+    // });
 
-    if (data.user) {
-     
-      return new User(
-        data.user.id,
-        email,
-        password, // A senha geralmente não é retornada após login
-        undefined, // Username
-        undefined, // avatarUrl
-        new Date(data.user.created_at) 
-      );
-    }
+    // if (error) {
+    //   console.error("Erro no login:", error.message);
+    //   return null;
+    // }
 
-    return null;
+    // if (data.user) {
+    //   console.log("Passou 2");
+    //   navigateHome(email);
+    // }
   }
 
   // Logout do usuário
@@ -86,14 +75,13 @@ export class UserService {
     }
 
     if (data.user) {
-      
       return new User(
         data.user.id,
         data.user.email ?? "",
-        "", // Senha não é retornada
-        undefined, // username não está disponível neste momento
-        undefined, // avatarUrl não está disponível neste momento
-        new Date(data.user.created_at) // Usa a data de criação retornada
+        "",
+        undefined,
+        undefined,
+        new Date(data.user.created_at)
       );
     }
 
@@ -113,10 +101,10 @@ export class UserService {
       return new User(
         data.user.id,
         data.user.email ?? "",
-        "", // Senha não é retornada
-        updates.username, // Atualização opcional de username
-        updates.avatarUrl, // Atualização opcional de avatarUrl
-        new Date(data.user.created_at) // Usa a data de criação retornada
+        "",
+        updates.username,
+        updates.avatarUrl,
+        new Date(data.user.created_at)
       );
     }
 

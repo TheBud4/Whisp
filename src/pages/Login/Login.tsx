@@ -3,21 +3,21 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
+
 type RootStackParamList = {
-    LoginSenha: undefined;
-  };
-  
-  type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "LoginSenha">;
+    LoginSenha: { email: string };
+};
+
+  type PasswordScreenNavigationProp = StackNavigationProp<RootStackParamList, "LoginSenha">;
+
 
 const LoginScreen: React.FC = () => {
     const [email, setEmail] = useState<string>('');
-    const navigation = useNavigation<HomeScreenNavigationProp>();
+    const navigation = useNavigation<PasswordScreenNavigationProp>();
 
 
     const handleLogin = () => {
-        // Lógica de login aqui
-        console.log('Email:', email);
-        navigation.navigate("LoginSenha")
+        navigation.navigate("LoginSenha", { email });
     };
 
     return (
@@ -32,6 +32,7 @@ const LoginScreen: React.FC = () => {
                 autoCapitalize="none"
             />
             <Button title="Login" onPress={handleLogin} />
+        
         </View>
     );
 };
