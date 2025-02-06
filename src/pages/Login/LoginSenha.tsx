@@ -24,6 +24,11 @@ const LoginSenhaScreen: React.FC = () => {
           console.error("Erro ao fazer login:", error);
         }
     };
+
+    const newUser = () => {
+        //ainda descubro como isso funciona, confia no processo
+        navigation.navigate("CreateAccount", { email });
+    };
     
 
     return (
@@ -42,7 +47,7 @@ const LoginSenhaScreen: React.FC = () => {
 
             <Button 
             title="Criar conta" 
-            onPress={handleLogin}
+            onPress={newUser}
 
             />
             </View>
