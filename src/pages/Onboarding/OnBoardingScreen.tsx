@@ -1,17 +1,14 @@
-import React from "react";
-import { Text, Image, StyleSheet, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons"; 
+import { Text, Image, TouchableOpacity } from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import Onboarding from "react-native-onboarding-swiper";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../../../@types/navigationTypes";
+import styles from "./style";
 
-type RootStackParamList = {
-  Login: undefined;
-};
-
-type HomeScreenNavigationProp = StackNavigationProp<
+type ScreenProps = StackNavigationProp<
   RootStackParamList,
-  "Login"
+  "OnboardingScreen"
 >;
 
 const CustomButton = ({
@@ -60,8 +57,8 @@ const DoneButton = (props: any) => (
   />
 );
 
-const OnBoarding: React.FC = () => {
-  const navigation = useNavigation<HomeScreenNavigationProp>();
+const OnBoardingScreen: React.FC = () => {
+  const navigation = useNavigation<ScreenProps>();
 
   return (
     <Onboarding
@@ -69,12 +66,10 @@ const OnBoarding: React.FC = () => {
         {
           backgroundColor: "#DBFFD9",
           image: (
-
             <Image
               style={styles.image}
               source={require("../../../assets/foto-onboarding1.png")}
             />
-            
           ),
           title: "Bem Vindo ao Whisp!",
           subtitle: "Seu aplicativo de mensagens favorito.",
@@ -102,8 +97,8 @@ const OnBoarding: React.FC = () => {
           subtitle: "Se comunicar nunca foi tão fácil.",
         },
       ]}
-      onDone={() => navigation.navigate("Login")}
-      onSkip={() => navigation.navigate("Login")}
+      onDone={() => navigation.navigate("FirstStepLoginScreen")}
+      onSkip={() => navigation.navigate("FirstStepLoginScreen")}
       NextButtonComponent={NextButton}
       SkipButtonComponent={SkipButton}
       DoneButtonComponent={DoneButton}
@@ -111,46 +106,4 @@ const OnBoarding: React.FC = () => {
     />
   );
 };
-
-const styles = StyleSheet.create({
-
-  gradientBackground: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-  image: {
-    width: 200,
-    height: 200,
-  },
-  buttonBase: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-    backgroundColor: "blue",
-    marginHorizontal: 10,
-  },
-  buttonText: {
-    color: "white",
-    fontWeight: "bold",
-    marginLeft: 8,
-  },
-  icon: {
-    marginRight: 5,
-  },
-  botaoproximo: {
-    backgroundColor: "blue",
-  },
-  botaopular: {
-    backgroundColor: "gray",
-  },
-  botaoPronto: {
-    backgroundColor: "green",
-  },
-});
-
-export default OnBoarding;
+export default OnBoardingScreen;
