@@ -1,6 +1,4 @@
-import { Text, View, TouchableOpacity } from "react-native";
 import React from "react";
-import { styles } from "src/styles/main";
 import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ContactsScreen from "./Contacts/ContactsScreen";
