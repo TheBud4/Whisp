@@ -8,6 +8,7 @@ import FirstStepLoginScreen from "../pages/TwoStepLogin/FirstStepLogin/FirstStep
 import SecondStepLoginScreen from "../pages/TwoStepLogin/SecondStepLogin/SecondStepLoginScreen";
 import RegistrationScreen from "../pages/Registration/RegistrationScreen";
 
+// Criação do componente de navegação
 const Stack = createNativeStackNavigator();
 
 const Routes: React.FC = () => {
