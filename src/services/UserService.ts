@@ -49,7 +49,7 @@ export class UserService {
     ]);
 
     if (profileError) {
-      throw 'Erro ao criar o perfil do usuário: ' + profileError?.message 
+      throw "Erro ao criar o perfil do usuário: " + profileError?.message;
     }
 
     return true;
@@ -82,35 +82,27 @@ export class UserService {
     return { userId: data.id };
   }
 
-  // Logout do usuário
-  static async logout(): Promise<boolean> {
-    const { error } = await supabase.auth.signOut();
-
-    if (error) {
-      console.error("Erro no logout:", error.message);
-      return false;
-    }
-
-    return true;
-  }
-
-  // Obter o usuário atual
-  static async getCurrentUser(): Promise<User | null> {
-    const { data, error } = await supabase.auth.getUser();
+  // Obter o usuário pelo ID
+  static async getCurrentUser(id: string): Promise<User | null> {
+    const { data, error } = await supabase
+      .from("users")
+      .select("*") 
+      .eq("id", id) 
+      .single(); 
 
     if (error) {
       console.error("Erro ao obter usuário atual:", error.message);
       return null;
     }
 
-    if (data.user) {
+    if (data) {
       return new User(
-        data.user.id,
-        data.user.email ?? "",
+        data.id,
+        data.email ?? "",
         "",
+        data.username ?? "Ainda não definido",
         undefined,
-        undefined,
-        new Date(data.user.created_at)
+        new Date(data.created_at)
       );
     }
 

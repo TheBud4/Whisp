@@ -10,10 +10,10 @@ import FirstStepLoginScreen from "../pages/TwoStepLogin/FirstStepLogin/FirstStep
 import SecondStepLoginScreen from "../pages/TwoStepLogin/SecondStepLogin/SecondStepLoginScreen";
 import RegistrationScreen from "../pages/Registration/RegistrationScreen";
 import ProfileScreen from "@/pages/Profile/ProfileScreen";
+import { RootStackParamList } from "../../@types/navigationTypes";
 
 // Criação do componente de navegação
-const Stack = createNativeStackNavigator();
-
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const Routes: React.FC = () => {
   return (
@@ -27,14 +27,21 @@ const Routes: React.FC = () => {
         <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
-          options={{
-            headerTitle: "Whisp",
-            headerBackVisible: false,
-            headerRight: () => (
-              <TouchableOpacity onPress={() => {}}>
-                <Ionicons name="settings-outline" size={24} color="black" />
-              </TouchableOpacity>
-            ),
+          options={({ route, navigation }) => {
+            const userId = route?.params?.userId ?? "default_user_id"; 
+            return {
+              headerTitle: "Whisp",
+              headerBackVisible: false,
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("ProfileScreen", { userId })
+                  }
+                >
+                  <Ionicons name="settings-outline" size={24} color="black" />
+                </TouchableOpacity>
+              ),
+            };
           }}
         />
         <Stack.Screen

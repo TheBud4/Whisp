@@ -25,7 +25,7 @@ const SecondStepLoginScreen: React.FC = () => {
     try {
       const loginResult = await UserService.login(email, password);
       if (!loginResult) return;
-      navigation.navigate("HomeScreen");
+      navigation.navigate("HomeScreen",{userId: loginResult.userId});
     } catch (error) {
       alert(error);
     }

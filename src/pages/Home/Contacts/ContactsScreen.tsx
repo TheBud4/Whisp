@@ -1,16 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
+import { useRoute, RouteProp } from "@react-navigation/native";
+import { RootStackParamList } from "../../../../@types/navigationTypes";
+import { ContactService } from "@/services/ContactService";
 
-const contacts = [
-  { id: "1", name: "João Silva", phone: "(11) 98765-4321" },
-  { id: "2", name: "Maria Oliveira", phone: "(21) 92345-6789" },
-  { id: "3", name: "Carlos Santos", phone: "(31) 99876-5432" },
-  { id: "4", name: "Ana Souza", phone: "(41) 91234-5678" },
-];
+type ContactsScreenRouteProp = RouteProp<RootStackParamList, "ContactsScreen">;
 
 const ContactsScreen: React.FC = () => {
+  const route = useRoute<ContactsScreenRouteProp>();
+  const { userId } = route.params;
+  const [contacts, setContacts] = useState<
+    { id: string; name: string; phone: string }[]
+  >([]);
+
+  useEffect(() => {
+    const fetchContacts = async () => {
+      try {
+        const userContacts = await ContactService.getContactsByUserId(userId);
+        setContacts(userContacts);
+      } catch (error) {
+        console.error("Erro ao buscar contatos:", error);
+      }
+    };
+
+    fetchContacts();
+  }, [userId]);
+
   return (
     <View style={styles.container}>
+      {contacts.length === 0 && <Text>Nenhum contato encontrado</Text>}
       <FlatList
         data={contacts}
         keyExtractor={(item) => item.id}
