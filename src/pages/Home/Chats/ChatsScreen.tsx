@@ -51,7 +51,7 @@ const ChatsScreen: React.FC = () => {
     };
 
     fetchConversations();
-  }, [userId]);
+  }, []);
 
   const openChat = (
     conversationId: string,

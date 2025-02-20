@@ -28,7 +28,7 @@ export default class ConversationService {
       return []; 
     }
 
-    console.log("IDs das conversas encontradas:", conversationIds);
+    //console.log("IDs das conversas encontradas:", conversationIds);
 
     // Agora usamos os IDs para buscar as conversas
     const { data, error } = await supabase
@@ -58,7 +58,7 @@ export default class ConversationService {
       return []; // Retorna um array vazio caso não haja dados
     }
 
-    console.log("Conversas encontradas:", data);
+    //console.log("Conversas encontradas:", data);
 
     return data;
   }
