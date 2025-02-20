@@ -1,13 +1,11 @@
 import { supabase } from "../../supabase";
 
 export default class ConversationService {
-  
   static async getUserConversations(userId: string) {
     if (!userId) {
       throw new Error("O ID do usuário é obrigatório.");
     }
 
-    // Primeiro, buscamos os conversation_ids da tabela conversation_members
     const { data: conversationIds, error: conversationIdsError } =
       await supabase
         .from("conversation_members")
@@ -22,32 +20,29 @@ export default class ConversationService {
       throw conversationIdsError;
     }
 
-    
     if (!conversationIds || conversationIds.length === 0) {
       console.error("Nenhuma conversa encontrada para o usuário.");
-      return []; 
+      return [];
     }
 
-    //console.log("IDs das conversas encontradas:", conversationIds);
-
-    // Agora usamos os IDs para buscar as conversas
     const { data, error } = await supabase
       .from("conversations")
       .select(
         `
-        id,
-        last_message_id,
-        created_at,
-        last_message:messages!conversations_last_message_id_fkey(content)
-      `
+      id,
+      name,
+      last_message_id,
+      created_at,
+      last_message:messages!conversations_last_message_id_fkey(content),
+      conversation_members(user_id)
+    `
       )
       .in(
         "id",
         conversationIds.map((c) => c.conversation_id)
-      ) // Passando os IDs das conversas
+      )
       .order("created_at", { ascending: false });
 
-    // Verificação para garantir que `data` não está undefined
     if (error) {
       console.error("Erro ao buscar conversas:", error);
       throw error;
@@ -55,11 +50,59 @@ export default class ConversationService {
 
     if (!data || data.length === 0) {
       console.error("Nenhuma conversa encontrada.");
-      return []; // Retorna um array vazio caso não haja dados
+      return [];
     }
 
-    //console.log("Conversas encontradas:", data);
+    const userIds = conversationIds.map((c) => c.conversation_id);
+    const { data: users, error: usersError } = await supabase
+      .from("users")
+      .select("id, username, email")
+      .in("id", userIds);
 
-    return data;
+    if (usersError) {
+      console.error("Erro ao buscar os usuários:", usersError);
+      throw usersError;
+    }
+
+    const { data: contacts, error: contactsError } = await supabase
+      .from("contacts")
+      .select("contact_id")
+      .eq("user_id", userId);
+
+    if (contactsError) {
+      console.error("Erro ao buscar os contatos:", contactsError);
+      throw contactsError;
+    }
+
+    const contactIds = contacts
+      ? contacts.map((contact) => contact.contact_id)
+      : [];
+
+    const conversationsWithDetails = data.map((conversation) => {
+      const usersInConversation = conversation.conversation_members
+        .map((member) => {
+          const user = users.find((u) => u.id === member.user_id);
+          return user
+            ? { user_id: user.id, username: user.username, email: user.email }
+            : null;
+        })
+        .filter(Boolean);
+
+      const usersInConversationWithContacts = usersInConversation
+        .map((user) => {
+          if (user) {
+            return {
+              ...user,
+              is_contact: contactIds.includes(user.user_id),
+            };
+          }
+          return null;
+        })
+        .filter(Boolean);
+
+      return { ...conversation, users: usersInConversationWithContacts };
+    });
+
+    return conversationsWithDetails;
   }
 }

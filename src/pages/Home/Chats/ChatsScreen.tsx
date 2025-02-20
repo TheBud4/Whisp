@@ -30,12 +30,10 @@ const ChatsScreen: React.FC = () => {
         const fetchedConversations =
           await ConversationService.getUserConversations(userId);
 
-        // Convertendo os dados para o formato correto
         const mappedConversations = fetchedConversations.map((conv: any) => {
-          // Aqui verificamos se a propriedade 'participants' está disponível
           const otherParticipant = conv.participants?.find(
             (p: any) => p.id !== userId
-          ); // Pegando o outro usuário da conversa
+          ); 
 
           return {
             id: conv.id,
@@ -45,6 +43,7 @@ const ChatsScreen: React.FC = () => {
         });
 
         setConversations(mappedConversations);
+        console.log("Conversas carregadas:", mappedConversations);
       } catch (error) {
         console.error("Erro ao carregar conversas:", error);
       }

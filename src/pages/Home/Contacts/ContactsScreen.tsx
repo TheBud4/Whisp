@@ -11,7 +11,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useRoute, RouteProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../../../@types/navigationTypes";
 import { ContactService } from "@/services/ContactService";
-import { MessageService } from "@/services/MessageService"; // Importação do serviço de mensagens
+import { MessageService } from "@/services/MessageService";  
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 type ContactsScreenRouteProp = RouteProp<RootStackParamList, "ContactsScreen">;
@@ -44,10 +44,8 @@ const ContactsScreen: React.FC = () => {
     fetchContacts();
   }, [userId]);
 
-  // Função para iniciar uma conversa com um contato
   const startConversation = async (contactId: string, contactName: string) => {
     try {
-      // Obtém ou cria uma conversa entre o usuário e o contato
       const conversationId = await MessageService.getOrCreateConversation(
         userId,
         contactId

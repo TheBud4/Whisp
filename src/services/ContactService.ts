@@ -18,13 +18,13 @@ export class ContactService {
 
       return data.map((contact) => {
         const user = contact.users as User;
-
         return {
           id: contact.contact_id,
           username: user?.username ?? "Nome desconhecido",
           email: user?.email ?? "Email desconhecido",
         };
       });
+      
     } catch (error) {
       console.error("Erro inesperado ao buscar contatos:", error);
       return [];
@@ -33,7 +33,6 @@ export class ContactService {
 
   static async saveContact(userId: string, email: string) {
     try {
-      // 1. Buscar o usuário pelo e-mail informado
       const { data: contactUser, error: userError } = await supabase
         .from("users")
         .select("id")
@@ -46,9 +45,8 @@ export class ContactService {
 
       const contactId = contactUser.id;
 
-      // 2. Verificar se o contato já está na lista do usuário
       const { data: existingContact, error: contactError } = await supabase
-        .from("contacts") // Nome da tabela de contatos
+        .from("contacts") 
         .select("*")
         .eq("user_id", userId)
         .eq("contact_id", contactId)
@@ -58,7 +56,6 @@ export class ContactService {
         return { message: "Contato já adicionado" };
       }
 
-      // 3. Adicionar o contato à lista do usuário
       const { error: insertError } = await supabase
         .from("contacts")
         .insert([{ user_id: userId, contact_id: contactId }]);
