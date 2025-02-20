@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { View, Text, TextInput, Button, TouchableOpacity } from "react-native";
 import { useRoute, RouteProp, useNavigation } from "@react-navigation/native";
 import { UserService } from "src/services/UserService";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../../@types/navigationTypes";
 import styles from "./style";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 type RouteProps = RouteProp<RootStackParamList, "SecondStepLoginScreen">;
 
-type ScreenProps = StackNavigationProp<
+type ScreenProps = NativeStackNavigationProp<
   RootStackParamList,
   "SecondStepLoginScreen"
 >;

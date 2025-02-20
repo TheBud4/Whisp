@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
   passwordContainer: {
     position: "relative",
-    height: 40,
+    height: 60,
     borderColor: "#ccc",
     borderWidth: 1,
     borderRadius: 4,

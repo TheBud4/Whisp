@@ -1,11 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useState } from "react";
 import { View, Text, TextInput, Button } from "react-native";
 import { RootStackParamList } from "../../../../@types/navigationTypes";
 import styles from "./style";
 
-type ScreenProps = StackNavigationProp<
+type ScreenProps = NativeStackNavigationProp<
   RootStackParamList,
   "FirstStepLoginScreen"
 >;

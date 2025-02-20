@@ -1,5 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native";
 
 // Importação das telas
 import OnboardingScreen from "../pages/Onboarding/OnBoardingScreen";
@@ -7,9 +9,11 @@ import HomeScreen from "../pages/Home/HomeScreen";
 import FirstStepLoginScreen from "../pages/TwoStepLogin/FirstStepLogin/FirstStepLoginScreen";
 import SecondStepLoginScreen from "../pages/TwoStepLogin/SecondStepLogin/SecondStepLoginScreen";
 import RegistrationScreen from "../pages/Registration/RegistrationScreen";
+import ProfileScreen from "@/pages/Profile/ProfileScreen";
 
 // Criação do componente de navegação
 const Stack = createNativeStackNavigator();
+
 
 const Routes: React.FC = () => {
   return (
@@ -23,7 +27,20 @@ const Routes: React.FC = () => {
         <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
-          options={{ headerShown: false }}
+          options={{
+            headerTitle: "Whisp",
+            headerBackVisible: false,
+            headerRight: () => (
+              <TouchableOpacity onPress={() => {}}>
+                <Ionicons name="settings-outline" size={24} color="black" />
+              </TouchableOpacity>
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="ProfileScreen"
+          component={ProfileScreen}
+          options={{ headerTitle: "Perfil" }}
         />
         <Stack.Screen
           name="FirstStepLoginScreen"

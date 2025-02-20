@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import styles from "./style";
 import { RootStackParamList } from "../../../@types/navigationTypes";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { UserService } from "@/services/UserService";
 import { User } from "@/models/User";
 
-type ScreenProps = StackNavigationProp<
+type ScreenProps = NativeStackNavigationProp<
   RootStackParamList,
   "RegistrationScreen"
 >;

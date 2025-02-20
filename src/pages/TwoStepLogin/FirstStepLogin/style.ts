@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   input: {
-    height: 40,
+    height: 60,
     borderColor: "#ccc",
     borderWidth: 1,
     marginBottom: 12,
