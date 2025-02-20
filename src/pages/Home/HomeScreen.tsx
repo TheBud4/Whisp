@@ -48,12 +48,12 @@ const HomeScreen: React.FC = () => {
         options={{ headerShown: false }}
         initialParams={{ userId }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Grupos"
         component={GroupsScreen}
         options={{ headerShown: false }}
         initialParams={{ userId }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };
