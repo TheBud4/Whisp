@@ -5,15 +5,16 @@ import {
   FlatList,
   StyleSheet,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useRoute, RouteProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../../../@types/navigationTypes";
 import { ContactService } from "@/services/ContactService";
+import { MessageService } from "@/services/MessageService"; // Importação do serviço de mensagens
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 type ContactsScreenRouteProp = RouteProp<RootStackParamList, "ContactsScreen">;
-
 type ScreenProps = NativeStackNavigationProp<
   RootStackParamList,
   "ContactsScreen"
@@ -24,41 +25,76 @@ const ContactsScreen: React.FC = () => {
   const navigation = useNavigation<ScreenProps>();
   const { userId } = route.params;
   const [contacts, setContacts] = useState<
-    { id: string; username: string; email:string}[]
+    { id: string; username: string; email: string }[]
   >([]);
+  const [loading, setLoading] = useState(true);
 
-useEffect(() => {
-  const fetchContacts = async () => {
+  useEffect(() => {
+    const fetchContacts = async () => {
+      try {
+        const userContacts = await ContactService.getContactsByUserId(userId);
+        setContacts(userContacts);
+      } catch (error) {
+        console.error("Erro ao buscar contatos:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchContacts();
+  }, [userId]);
+
+  // Função para iniciar uma conversa com um contato
+  const startConversation = async (contactId: string, contactName: string) => {
     try {
-      const userContacts = await ContactService.getContactsByUserId(userId);
-      setContacts(userContacts);
+      // Obtém ou cria uma conversa entre o usuário e o contato
+      const conversationId = await MessageService.getOrCreateConversation(
+        userId,
+        contactId
+      );
+
+      if (conversationId) {
+        navigation.navigate("ChatScreen", {
+          userId: userId,
+          contactId: contactId,
+          contactName: contactName,
+          conversationId: conversationId,
+        });
+      }
     } catch (error) {
-      console.error("Erro ao buscar contatos:", error);
+      console.error("Erro ao iniciar conversa:", error);
     }
   };
 
-  fetchContacts();
-}, [userId]);
-
-
   return (
     <View style={styles.container}>
-      {contacts.length === 0 && <Text>Nenhum contato encontrado</Text>}
-      <FlatList
-        data={contacts}
-        keyExtractor={(contact) => contact.id}
-        renderItem={(contact) => (
-          <View style={styles.contactItem}>
-            <Text style={styles.name}>{contact.item.username || "Sem nome"}</Text>
-            <Text style={styles.phone}>{contact.item.email || "Sem email"}</Text>
-          </View>
-        )}
-      />
+      {loading ? (
+        <ActivityIndicator size="large" color="#007AFF" />
+      ) : contacts.length === 0 ? (
+        <Text>Nenhum contato encontrado</Text>
+      ) : (
+        <FlatList
+          data={contacts}
+          keyExtractor={(contact) => contact.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.contactItem}
+              onPress={() => startConversation(item.id, item.username)}
+            >
+              <Text style={styles.name}>{item.username || "Sem nome"}</Text>
+              <Text style={styles.email}>{item.email || "Sem email"}</Text>
+            </TouchableOpacity>
+          )}
+        />
+      )}
 
-      {/* Botão flutuante */}
-      <TouchableOpacity style={styles.fab} onPress={() => {
-        navigation.navigate("AddContactScreen", { userId });
-      }}>
+      {/* Botão flutuante para adicionar contatos */}
+      <TouchableOpacity
+        style={styles.fab}
+        onPress={() => {
+          navigation.navigate("AddContactScreen", { userId });
+        }}
+      >
         <Icon name="add" size={24} color="#fff" />
       </TouchableOpacity>
     </View>
@@ -75,12 +111,15 @@ const styles = StyleSheet.create({
     padding: 12,
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
+    backgroundColor: "#f9f9f9",
+    borderRadius: 8,
+    marginBottom: 10,
   },
   name: {
     fontSize: 18,
     fontWeight: "bold",
   },
-  phone: {
+  email: {
     fontSize: 16,
     color: "gray",
   },
@@ -88,14 +127,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 20,
     bottom: 20,
-    backgroundColor: "#007AFF", // Cor do botão
+    backgroundColor: "#007AFF",
     width: 56,
     height: 56,
     borderRadius: 28,
     justifyContent: "center",
     alignItems: "center",
-    elevation: 5, // Sombra no Android
-    shadowColor: "#000", // Sombra no iOS
+    elevation: 5,
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,

@@ -11,7 +11,7 @@ export type RootStackParamList = {
   AddContactScreen: { userId: string };
   
   //TODO: Criar essas telas
-  ChatScreen: { userId: string; chatId: string };
+  ChatScreen: { userId: string; contactId: string, contactName: string,conversationId: string };
 
   GroupsScreen: { userId: string };
   ChatsScreen: { userId: string };

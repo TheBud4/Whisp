@@ -12,6 +12,7 @@ import SecondStepLoginScreen from "../pages/TwoStepLogin/SecondStepLogin/SecondS
 import RegistrationScreen from "../pages/Registration/RegistrationScreen";
 import ProfileScreen from "@/pages/Profile/ProfileScreen";
 import AddContactScreen from "@/pages/AddContact/AddContactScreen";
+import ChatScreen from "@/pages/Chat/ChatScreen";
 
 // Criação do componente de navegação
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -68,6 +69,11 @@ const Routes: React.FC = () => {
         <Stack.Screen
           name="AddContactScreen"
           component={AddContactScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ChatScreen"
+          component={ChatScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
