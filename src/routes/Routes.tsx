@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
+import { RootStackParamList } from "../../@types/navigationTypes";
 
 // Importação das telas
 import OnboardingScreen from "../pages/Onboarding/OnBoardingScreen";
@@ -10,7 +11,7 @@ import FirstStepLoginScreen from "../pages/TwoStepLogin/FirstStepLogin/FirstStep
 import SecondStepLoginScreen from "../pages/TwoStepLogin/SecondStepLogin/SecondStepLoginScreen";
 import RegistrationScreen from "../pages/Registration/RegistrationScreen";
 import ProfileScreen from "@/pages/Profile/ProfileScreen";
-import { RootStackParamList } from "../../@types/navigationTypes";
+import AddContactScreen from "@/pages/AddContact/AddContactScreen";
 
 // Criação do componente de navegação
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -28,7 +29,7 @@ const Routes: React.FC = () => {
           name="HomeScreen"
           component={HomeScreen}
           options={({ route, navigation }) => {
-            const userId = route?.params?.userId ?? "default_user_id"; 
+            const userId = route?.params?.userId ?? "default_user_id";
             return {
               headerTitle: "Whisp",
               headerBackVisible: false,
@@ -62,6 +63,11 @@ const Routes: React.FC = () => {
         <Stack.Screen
           name="RegistrationScreen"
           component={RegistrationScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="AddContactScreen"
+          component={AddContactScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
