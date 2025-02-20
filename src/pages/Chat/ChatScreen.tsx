@@ -34,7 +34,7 @@ const ChatScreen: React.FC = () => {
 
      if (!conversationId) {
        console.error("conversationId não está definido!");
-       return; // Evita a chamada se não houver conversationId
+       return;
      }
      
     const fetchMessages = async () => {

@@ -36,9 +36,9 @@ const RegistrationScreen: React.FC = () => {
     };
     try {
       const register = await UserService.register(user);
-      
+
       if (!register) return;
-      
+
       navigation.navigate("FirstStepLoginScreen");
     } catch (error) {
       alert(error);

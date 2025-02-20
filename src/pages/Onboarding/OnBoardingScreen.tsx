@@ -1,12 +1,12 @@
 import { Text, Image, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Onboarding from "react-native-onboarding-swiper";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../../@types/navigationTypes";
 import styles from "./style";
 
-type ScreenProps = StackNavigationProp<
+type ScreenProps = NativeStackNavigationProp<
   RootStackParamList,
   "OnboardingScreen"
 >;

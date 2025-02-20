@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { useRoute, RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "../../../@types/navigationTypes";
 import { UserService } from "@/services/UserService";
 import { User } from "@/models/User";
-
+import "./style.ts"
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, "ProfileScreen">;
 
 const ProfileScreen: React.FC = () => {
